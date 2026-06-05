@@ -48,8 +48,11 @@ graph LR
     style B fill:#ccffcc,stroke:#00aa00,stroke-width:2px,color:#000000;
     style C fill:#cce6ff,stroke:#0066cc,stroke-width:2px,color:#000000;
 ```
+Importancia para la Evaluación: Este documento constituye el pilar fundamental para la defensa teórica y práctica de tu calificación individual. En el desarrollo de software moderno, el código fuente por sí solo no refleja el proceso de toma de decisiones; este archivo evidencia formalmente ante el cuerpo docente que la estructura del sistema no es accidental, sino el resultado de aplicar criterios de ingeniería rigurosos, garantizando que comprendes la teoría de diseño limpio y sabes cómo implementarla bajo presión académica.
+
+
 
 Integrantes: 
 Xamuel Romero   
-Alan Mendoza
+Alan Mendoza y
 Angel Colmenares
