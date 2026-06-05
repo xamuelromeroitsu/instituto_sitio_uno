@@ -36,6 +36,7 @@ Para evitar que la aplicación se convierta en un bloque de código rígido y ac
 Ninguna funcionalidad de esta aplicación se escribe sin antes tener una prueba automatizada que valide su comportamiento. Implementamos el ciclo estricto de TDD:
 
 
+```mermaid
 graph LR
     subgraph Ciclo TDD
     A[🔴 RED<br>Escribir un test que falle] --> B[🟢 GREEN<br>Hacer que el test pase]
