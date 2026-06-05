@@ -47,9 +47,8 @@ graph LR
     style A fill:#ffcccc,stroke:#ff0000,stroke-width:2px;
     style B fill:#ccffcc,stroke:#00aa00,stroke-width:2px;
     style C fill:#cce6ff,stroke:#0066cc,stroke-width:2px;
+```
 
-### Ejemplo de Aplicación Práctica (Registro de Usuarios):
-
-1. **Fase RED (Rojo):** Antes de diseñar el formulario en la pantalla, creamos una prueba unitaria que intente registrar un usuario con un correo inválido (ej. sin `@`). Al ejecutar el comando de pruebas, este fallará con un color rojo porque la lógica aún no existe.
-2. **Fase GREEN (Verde):** Escribimos el código mínimo necesario dentro de nuestro caso de uso para validar el string del correo y hacer que la prueba pase a color verde.
-3. **Fase REFACTOR (Refactorizar):** Limpiamos la estructura, eliminamos duplicados y ordenamos las funciones con la total tranquilidad de que la prueba sigue pasando con éxito (cero riesgo de romper código antiguo).
+Integrantes: Xamuel Romero 
+             Alan Mendoza
+             Angel Colmenares
