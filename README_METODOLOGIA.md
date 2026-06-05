@@ -44,9 +44,9 @@ graph LR
     C --> A
     end
 
-    style A fill:#ffcccc,stroke:#ff0000,stroke-width:2px;
-    style B fill:#ccffcc,stroke:#00aa00,stroke-width:2px;
-    style C fill:#cce6ff,stroke:#0066cc,stroke-width:2px;
+    style A fill:#ffcccc,stroke:#ff0000,stroke-width:2px,color:#000000;
+    style B fill:#ccffcc,stroke:#00aa00,stroke-width:2px,color:#000000;
+    style C fill:#cce6ff,stroke:#0066cc,stroke-width:2px,color:#000000;
 ```
 
 Integrantes: Xamuel Romero 
