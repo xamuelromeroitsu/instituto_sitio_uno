@@ -49,6 +49,7 @@ graph LR
     style C fill:#cce6ff,stroke:#0066cc,stroke-width:2px,color:#000000;
 ```
 
-Integrantes: Xamuel Romero 
-             Alan Mendoza
-             Angel Colmenares
+Integrantes: 
+Xamuel Romero   
+Alan Mendoza
+Angel Colmenares
