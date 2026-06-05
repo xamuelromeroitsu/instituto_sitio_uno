@@ -35,18 +35,17 @@ Para evitar que la aplicación se convierta en un bloque de código rígido y ac
 
 Ninguna funcionalidad de esta aplicación se escribe sin antes tener una prueba automatizada que valide su comportamiento. Implementamos el ciclo estricto de TDD:
 
-```text
-┌──────────────────────────────────────────────────────────────┐
-│                  CICLO DE DESARROLLO TDD                     │
-├───────────────┬─────────────────┬────────────────────────────┤
-│   🔴 RED      │    🟢 GREEN     │   🔵 REFACTOR              │
-├───────────────┼─────────────────┼────────────────────────────┤
-│  Escribir un  │  Hacer que el   │  Optimizar el código de    │
-│  test que     │  test pase con  │  producción y las pruebas  │
-│  falle.       │  el código mínimo│  sin romper nada.          │
-└───────┬───────┴────────┬────────┴─────────────┬──────────────┘
-        │                │                      │
-        └──────►─────────┴──────────►───────────┘
+
+graph LR
+    subgraph Ciclo TDD
+    A[🔴 RED<br>Escribir un test que falle] --> B[🟢 GREEN<br>Hacer que el test pase]
+    B --> C[🔵 REFACTOR<br>Optimizar sin romper nada]
+    C --> A
+    end
+
+    style A fill:#ffcccc,stroke:#ff0000,stroke-width:2px;
+    style B fill:#ccffcc,stroke:#00aa00,stroke-width:2px;
+    style C fill:#cce6ff,stroke:#0066cc,stroke-width:2px;
 
 ### Ejemplo de Aplicación Práctica (Registro de Usuarios):
 
