@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instituto ITS - Campus Educativo</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="/web/image/website/2/logo/ITSU?unique=898cfd6" class="brand-logo" width="95" height="40" alt="ITSU" loading="lazy">
+    </a>
+    <button class="menu-toggle" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="main-nav">
+      <a href="#mision">Instituto</a>
+      <a href="pages/autenticacion.html">Registrarse</a>
+      <a href="pages/estudiantes.html">Estudiantes</a>
+      <a href="pages/academico.html">Académico</a>
+      <a href="pages/materiales.html">Materiales</a>
+      <a href="pages/finanzas.html">Finanzas</a>
+      <a href="pages/administracion.html">Administración</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Bienvenido al campus digital</span>
+        <h2>Una experiencia moderna para alumnos, docentes y administrativos.</h2>
+        <p>Descubre un sitio diseñado para gestionar identidades, estudiantes, programas académicos y recursos con la misma lógica de negocio de tu backend Ruby.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="pages/autenticacion.html">Acceder al Login</a>
+          <a class="secondary-btn" href="#modulos">Explorar secciones</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <span>Seguridad RBAC</span>
+          <h3>Control de acceso inteligente</h3>
+          <p>Su backend ya valida roles y permisos. Aquí solo mostramos lo que el usuario puede ver.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mision" class="intro-section">
+      <div class="section-header">
+        <small>Presentación del instituto</small>
+        <h2>Un entorno académico con estilo institucional</h2>
+      </div>
+      <p>ITS ofrece una primera impresión limpia y profesional: colores institucionales, tipografía clara y una navegación directa hacia los módulos que el usuario necesita.</p>
+    </section>
+
+    <section id="modulos" class="modules-area">
+      <div class="section-header">
+        <small>Áreas principales</small>
+        <h2>Accede a todas las áreas del campus</h2>
+      </div>
+      <div id="modulesGrid" class="modules-grid"></div>
+    </section>
+
+    <section class="fast-links">
+      <h2>Accesos rápidos</h2>
+      <div class="links-grid">
+        <a class="link-card" href="pages/estudiantes.html">Estudiantes</a>
+        <a class="link-card" href="pages/academico.html">Académico</a>
+        <a class="link-card" href="pages/materiales.html">Materiales</a>
+        <a class="link-card" href="pages/finanzas.html">Finanzas</a>
+        <a class="link-card" href="pages/administracion.html">Administración</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacto">
+    <p>ITS · Plataforma educativa · Back-end en Ruby, Front-end modular.</p>
+    <p>© <span id="currentYear"></span> Instituto Tecnológico Superior</p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
