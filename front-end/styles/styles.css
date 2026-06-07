@@ -129,6 +129,18 @@ img {
   width: auto;
 }
 
+/* compact logo size on mobile */
+@media (max-width: 860px) {
+  .brand-logo {
+    height: 34px;
+  }
+
+  /* keep only logo + hamburger when scrolling down on mobile */
+  .site-header.scrolled .main-nav {
+    display: none;
+  }
+}
+
 @media (max-width: 860px) {
   .menu-toggle {
     display: flex;
