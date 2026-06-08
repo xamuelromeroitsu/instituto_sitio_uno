@@ -1,0 +1,299 @@
+﻿/* Minimal styles for the clean ITS landing page */
+:root {
+  --background: #f4f6f9;
+  --surface: #ffffff;
+  --text: #102241;
+  --muted: #5c6a82;
+  --accent: #1f4ed8;
+  --accent-soft: #dbeafe;
+  --shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg, #eef2f7 0%, #f8fafc 100%);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0; /* remove lateral padding so logo can be larger */
+  height: 64px; /* fixed header height requested */
+  background: #102241;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  /* smoother show/hide: long transform easing, faster visual updates for other props */
+  transition: transform 420ms cubic-bezier(.2,.8,.2,1), padding 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+  will-change: transform, padding, box-shadow;
+}
+
+.site-header.scrolled {
+  box-shadow: 0 6px 18px rgba(2,6,23,0.16);
+}
+
+.site-header.hidden {
+  transform: translateY(calc(-100% - 4px));
+}
+
+.brand-logo {
+  width: 399px; /* requested width */
+  height: 64px; /* requested height */
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.brand-text {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.brand-text p {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.brand-text strong {
+  display: block;
+  font-size: 1.1rem;
+}
+
+/* Header action buttons */
+.header-actions {
+  margin-left: auto;
+  margin-right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px; /* cuadrados ovalados: sutilmente redondeados */
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+main {
+  padding: 0 2rem 3rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
+  align-items: center;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 3rem 0 2rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.hero-copy h2 {
+  margin: 1.25rem 0 1rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+
+.hero-copy p {
+  margin: 1.5rem 0 0;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 42rem;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-card {
+  width: 100%;
+  background: #fff;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(16, 34, 65, 0.08);
+}
+
+.hero-card span {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.hero-card h3 {
+  margin: 0 0 1rem;
+  font-size: 1.55rem;
+}
+
+.hero-card p {
+  margin: 0;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.intro-section,
+.feature-section {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.section-header {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-header small {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.intro-section p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 54rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.feature-grid article {
+  background: #fff;
+  border: 1px solid rgba(16, 34, 65, 0.08);
+  border-radius: 1.75rem;
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+}
+
+.feature-grid h3 {
+  margin: 0 0 0.85rem;
+}
+
+.feature-grid p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.site-footer {
+  padding: 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.site-header.scrolled {
+  padding: 0.7rem 1.5rem;
+  box-shadow: 0 8px 30px rgba(16,34,65,0.16);
+  background: rgba(16,34,65,0.98);
+}
+
+/* hide header when scrolling down */
+.site-header.hidden {
+  transform: translateY(-110%);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.25rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  main {
+    padding: 0 1.25rem 2rem;
+  }
+
+  .hero {
+    gap: 1.5rem;
+    padding-top: 2.5rem;
+  }
+
+  /* Logo scales down on small screens to avoid overflow */
+  .brand-logo {
+    width: 120px;
+    height: auto;
+  }
+}
