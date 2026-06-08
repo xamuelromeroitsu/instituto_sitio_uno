@@ -42,6 +42,12 @@ img {
   padding: 1.5rem 2rem;
   background: #102241;
   color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  /* smoother show/hide: long transform easing, faster visual updates for other props */
+  transition: transform 420ms cubic-bezier(.2,.8,.2,1), padding 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+  will-change: transform, padding, box-shadow;
 }
 
 .brand-logo {
@@ -198,6 +204,17 @@ main {
   color: var(--muted);
   font-size: 0.95rem;
   background: #fff;
+}
+
+.site-header.scrolled {
+  padding: 0.7rem 1.5rem;
+  box-shadow: 0 8px 30px rgba(16,34,65,0.16);
+  background: rgba(16,34,65,0.98);
+}
+
+/* hide header when scrolling down */
+.site-header.hidden {
+  transform: translateY(-110%);
 }
 
 @media (max-width: 900px) {
