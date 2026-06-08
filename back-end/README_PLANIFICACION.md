@@ -30,7 +30,7 @@ Este documento contiene la hoja de ruta dividida por **Oleadas de Trabajo**, asi
 
 ### 📅 Día 1: Setup e Infraestructura Base
 * [ ] **[INFRA-1] (XR):** Configurar entorno Docker, Docker Compose y esqueleto de enrutamiento Roda en la raíz.
-* [ ] **[UI-1] (AM):** Crear estructura base `index.html`, configurar Tailwind CSS y el enrutador básico de la SPA en JS.
+* [x] **[UI-1] (AM):** Crear estructura base `index.html`, configurar Tailwind CSS y el enrutador básico de la SPA en JS.
 * [ ] **[DB-1] (AC):** Diseñar migraciones iniciales en PostgreSQL para las tablas de `usuarios` y `estudiantes` usando Sequel.
 
 ### 📅 Día 2: Módulo de Autenticación (Core de Seguridad)
