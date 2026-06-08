@@ -39,7 +39,8 @@ img {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.5rem 2rem;
+  padding: 0; /* remove lateral padding so logo can be larger */
+  height: 64px; /* fixed header height requested */
   background: #102241;
   color: #fff;
   position: sticky;
@@ -50,9 +51,19 @@ img {
   will-change: transform, padding, box-shadow;
 }
 
+.site-header.scrolled {
+  box-shadow: 0 6px 18px rgba(2,6,23,0.16);
+}
+
+.site-header.hidden {
+  transform: translateY(calc(-100% - 4px));
+}
+
 .brand-logo {
-  width: auto;
-  height: 48px;
+  width: 399px; /* requested width */
+  height: 64px; /* requested height */
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .brand-text {
@@ -69,6 +80,38 @@ img {
 .brand-text strong {
   display: block;
   font-size: 1.1rem;
+}
+
+/* Header action buttons */
+.header-actions {
+  margin-left: auto;
+  margin-right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px; /* cuadrados ovalados: sutilmente redondeados */
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.18);
 }
 
 main {
@@ -234,6 +277,11 @@ main {
     padding: 1.25rem;
   }
 
+  .header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
   main {
     padding: 0 1.25rem 2rem;
   }
@@ -241,5 +289,11 @@ main {
   .hero {
     gap: 1.5rem;
     padding-top: 2.5rem;
+  }
+
+  /* Logo scales down on small screens to avoid overflow */
+  .brand-logo {
+    width: 120px;
+    height: auto;
   }
 }
