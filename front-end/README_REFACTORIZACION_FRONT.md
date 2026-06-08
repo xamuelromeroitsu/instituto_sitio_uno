@@ -71,8 +71,10 @@ El front-end no sustituye la seguridad del servidor, pero debe actuar como prime
 ## 📐 Guía para la estructura del proyecto
 
 - `components/` – UI reutilizable y atómica.
+- `js/components/` – componentes JS reutilizables como la navegación responsive.
+- `js/services/` – datos estáticos y consumo de APIs.
+- `js/views/` – lógica de página por HTML, separada y clara.
 - `views/` o `pages/` – cada dominio principal del sistema.
-- `services/` – llamadas a APIs, manejo de tokens y servicios de datos.
 - `stores/` o `context/` – estado global y permisos del usuario.
 - `utils/` – funciones de validación, formateo y helpers.
 - `assets/` – imágenes, estilos y recursos compartidos.
