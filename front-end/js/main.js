@@ -1,4 +1,4 @@
-// js/main.js
+
 // Consolidated front-end scripting: header scroll behavior
 
 const SHRINK_THRESHOLD = 20;
