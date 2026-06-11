@@ -1,6 +1,6 @@
 require 'minitest/autorun'
-require_relative '../payments_app/lib/account'
-require_relative '../payments_app/lib/services/payment_service'
+require_relative '../lib/account'
+require_relative '../lib/services/payment_service'
 
 class AccountTest < Minitest::Test
   def setup

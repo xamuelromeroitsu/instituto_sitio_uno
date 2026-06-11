@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require_relative 'lib/entities/student'
+require_relative 'lib/student'
 require_relative 'lib/account'
 require_relative 'lib/services/payment_service'
 require 'date'
