@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'AptosFallback';
+  src: local('Aptos'), local('Segoe UI'), local('Helvetica Neue');
+}
+
+:root {
+  font-family: 'AptosFallback', 'Trebuchet MS', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #11213d;
+  background: #eef2f7;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-width: 320px;
+}
