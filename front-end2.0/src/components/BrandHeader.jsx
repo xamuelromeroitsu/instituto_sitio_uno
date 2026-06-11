@@ -1,6 +1,6 @@
 import { useHeaderScroll } from '../hooks/useHeaderScroll'
 
-export function BrandHeader() {
+export function BrandHeader({ onOpenLogin, onOpenRegister }) {
   const { isScrolled, isHidden } = useHeaderScroll()
 
   return (
@@ -18,12 +18,12 @@ export function BrandHeader() {
       </a>
 
       <nav className="header-actions" aria-label="Acciones principales">
-        <a className="header-action outline" href="#instituto">
-          Conocer instituto
-        </a>
-        <a className="header-action solid" href="#valores">
-          Ver valores
-        </a>
+        <button className="header-action outline" type="button" onClick={onOpenLogin}>
+          Iniciar sesión
+        </button>
+        <button className="header-action solid" type="button" onClick={onOpenRegister}>
+          Registrarse
+        </button>
       </nav>
     </header>
   )
