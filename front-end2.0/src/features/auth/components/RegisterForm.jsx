@@ -6,7 +6,7 @@ export function RegisterForm() {
 
         <label className="field">
           <span>Correo</span>
-          <input type="email" name="email" placeholder="usuario@itsu.edu" autoComplete="email" />
+          <input type="email" name="email" placeholder="Email" autoComplete="email" />
         </label>
 
         <label className="field">
@@ -68,7 +68,7 @@ export function RegisterForm() {
 
         <label className="field">
           <span>Teléfono</span>
-          <input type="tel" name="telefono" placeholder="(000) 000-0000" />
+          <input type="tel" name="telefono" placeholder="Teléfono celular" />
         </label>
       </section>
 

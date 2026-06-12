@@ -3,7 +3,7 @@ export function LoginForm() {
     <form className="auth-form">
       <label className="field">
         <span>Correo institucional</span>
-        <input type="email" name="email" placeholder="usuario@itsu.edu" autoComplete="email" />
+        <input type="email" name="email" placeholder="Email" autoComplete="email" />
       </label>
 
       <label className="field">
