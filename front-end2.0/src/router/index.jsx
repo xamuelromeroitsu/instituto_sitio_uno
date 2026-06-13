@@ -7,6 +7,12 @@ const LandingPage = lazy(() =>
   import('../pages/LandingPage').then((m) => ({ default: m.LandingPage })),
 )
 
+const LoginOverlay = lazy(() =>
+  import('../pages/LoginOverlay').then((m) => ({
+    default: m.LoginOverlay,
+  })),
+)
+
 const RegisterOverlay = lazy(() =>
   import('../pages/RegisterOverlay').then((m) => ({
     default: m.RegisterOverlay,
@@ -33,6 +39,7 @@ export const router = createBrowserRouter([
         element: <SuspenseFallback />,
         children: [
           { path: '/', element: <LandingPage /> },
+          { path: '/iniciar-sesion', element: <LoginOverlay /> },
           { path: '/registro', element: <RegisterOverlay /> },
           {
             path: '/dashboard',

@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import { BrandHeader, HeroSection, SectionHeading, ValueGrid, SiteFooter } from '../components'
-import { AuthModal } from '../features/auth/components/AuthModal'
 
 const hero = {
   eyebrow: 'Campus digital',
@@ -47,12 +45,10 @@ const values = {
 }
 
 export function LandingPage() {
-  const [authMode, setAuthMode] = useState(null)
-
   return (
     <div className="landing-page">
       <main className="page-content">
-        <BrandHeader onOpenLogin={() => setAuthMode('login')} />
+        <BrandHeader />
 
         <HeroSection content={hero} />
 
@@ -68,12 +64,6 @@ export function LandingPage() {
       </main>
 
       <SiteFooter />
-
-      <AuthModal
-        mode={authMode}
-        onClose={() => setAuthMode(null)}
-        onSwitchMode={setAuthMode}
-      />
     </div>
   )
 }
