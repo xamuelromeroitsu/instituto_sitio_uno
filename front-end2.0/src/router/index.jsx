@@ -1,16 +1,49 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import { createBrowserRouter, Outlet } from 'react-router-dom'
 import { App } from '../App'
-import { LandingPage } from '../features/landing/LandingPage'
-import { RegisterPage } from '../features/auth/components/RegisterPage'
-import { DashboardPage } from '../features/dashboard/DashboardPage'
+import { ProtectedRoute } from './ProtectedRoute'
+
+const LandingPage = lazy(() =>
+  import('../pages/LandingPage').then((m) => ({ default: m.LandingPage })),
+)
+
+const RegisterOverlay = lazy(() =>
+  import('../pages/RegisterOverlay').then((m) => ({
+    default: m.RegisterOverlay,
+  })),
+)
+
+const DashboardPage = lazy(() =>
+  import('../pages/DashboardPage').then((m) => ({ default: m.DashboardPage })),
+)
+
+function SuspenseFallback() {
+  return (
+    <Suspense fallback={<div className="page-content"><p>Cargando…</p></div>}>
+      <Outlet />
+    </Suspense>
+  )
+}
 
 export const router = createBrowserRouter([
   {
     element: <App />,
     children: [
-      { path: '/', element: <LandingPage /> },
-      { path: '/registro', element: <RegisterPage /> },
-      { path: '/dashboard', element: <DashboardPage /> },
+      {
+        element: <SuspenseFallback />,
+        children: [
+          { path: '/', element: <LandingPage /> },
+          { path: '/registro', element: <RegisterOverlay /> },
+          {
+            path: '/dashboard',
+            element: (
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            ),
+          },
+        ],
+      },
     ],
   },
 ])

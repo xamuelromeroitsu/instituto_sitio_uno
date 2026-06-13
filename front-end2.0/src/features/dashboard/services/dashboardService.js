@@ -1,3 +1,5 @@
+import { httpClient } from '../../../services/httpClient'
+
 export async function getDashboardData() {
-  return Promise.resolve({ ok: true })
+  return httpClient.get('/api/dashboard')
 }
