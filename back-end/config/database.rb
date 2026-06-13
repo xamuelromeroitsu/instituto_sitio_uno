@@ -2,9 +2,9 @@ DB = Sequel.connect(
   adapter:  'postgres',
   host:     ENV.fetch('DB_HOST', 'localhost'),
   port:     ENV.fetch('DB_PORT', 5432),
-  database: ENV.fetch('DB_NAME', 'itsu_db'),
+  database: ENV.fetch('DB_NAME', 'itsu'),
   user:     ENV.fetch('DB_USER', 'postgres'),
-  password: ENV.fetch('DB_PASS', ''),
+  password: ENV.fetch('DB_PASS', 'dinosaurioxa'),
   max_connections: 10
 )
 
