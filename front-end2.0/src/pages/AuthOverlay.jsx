@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import { LandingPage } from './LandingPage'
 import { LoginPage } from '../features/auth/components/LoginPage'
+import { RegisterPage } from '../features/auth/components/RegisterPage'
 
-export function LoginOverlay() {
+export function AuthOverlay({ mode }) {
   const navigate = useNavigate()
 
   return (
@@ -27,7 +28,12 @@ export function LoginOverlay() {
           >
             ×
           </button>
-          <LoginPage onSwitchToRegister={() => navigate('/registro')} />
+
+          {mode === 'login' ? (
+            <LoginPage onSwitchToRegister={() => navigate('/registro')} />
+          ) : (
+            <RegisterPage onSwitchToLogin={() => navigate('/')} />
+          )}
         </div>
       </div>
     </>

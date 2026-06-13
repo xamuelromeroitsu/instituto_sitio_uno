@@ -1,10 +1,6 @@
-import { useNavigate } from 'react-router-dom'
 import { LoginForm } from './LoginForm'
 
 export function LoginPage({ onSwitchToRegister }) {
-  const navigate = useNavigate()
-  const handleSwitchToRegister = onSwitchToRegister || (() => navigate('/registro'))
-
   return (
     <div className="auth-page">
       <header className="auth-page__header">
@@ -15,7 +11,7 @@ export function LoginPage({ onSwitchToRegister }) {
 
       <LoginForm />
 
-      <button type="button" className="auth-switch" onClick={handleSwitchToRegister}>
+      <button type="button" className="auth-switch" onClick={onSwitchToRegister}>
         Ir a registrarse
       </button>
     </div>

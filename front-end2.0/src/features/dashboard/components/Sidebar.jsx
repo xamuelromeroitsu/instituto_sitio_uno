@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../contexts/AuthContext'
 
-export function Sidebar({ student }) {
-  const { logout } = useAuth()
+export function Sidebar() {
+  const { user, logout } = useAuth()
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -13,14 +13,13 @@ export function Sidebar({ student }) {
   return (
     <aside className="dashboard-sidebar">
       <div className="sidebar-user">
-        <p className="sidebar-user__name">{student?.nombre || 'Estudiante'}</p>
-        <p className="sidebar-user__cedula">C.I. {student?.cedula}</p>
-        <p className="sidebar-user__email">{student?.email}</p>
+        <p className="sidebar-user__name">{user?.nombre || 'Estudiante'}</p>
+        <p className="sidebar-user__email">{user?.email}</p>
       </div>
 
       <nav>
         <ul>
-          <li><a href="/dashboard">Resumen</a></li>
+          <li><Link to="/dashboard">Resumen</Link></li>
         </ul>
       </nav>
 
