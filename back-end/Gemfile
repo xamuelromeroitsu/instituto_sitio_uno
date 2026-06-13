@@ -1,0 +1,15 @@
+# back-end/Gemfile
+source 'https://rubygems.org'
+
+gem 'sinatra'       # Framework web para las rutas API
+gem 'sequel'        # ORM para conectar a la base de datos
+gem 'pg'            # Driver para PostgreSQL
+gem 'puma'          # Servidor web (alternativa a WEBrick)
+gem 'bcrypt'        # Para encriptar contraseñas
+gem 'jwt'           # Para tokens de autenticación
+gem 'rack-cors'     # Para permitir peticiones del front-end
+
+group :test do
+  gem 'minitest'    # Framework de tests
+  gem 'rack-test'   # Para testear rutas Sinatra
+end
