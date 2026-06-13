@@ -1,11 +1,21 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
+function getToken() {
+  try {
+    return localStorage.getItem('itsu_token')
+  } catch {
+    return null
+  }
+}
+
 async function request(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`
+  const token = getToken()
 
   const config = {
     headers: {
       'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,
     },
     ...options,

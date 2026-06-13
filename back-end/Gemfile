@@ -2,6 +2,7 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'       # Framework web para las rutas API
+gem 'rackup'        # Necesario para arrancar el servidor
 gem 'sequel'        # ORM para conectar a la base de datos
 gem 'pg'            # Driver para PostgreSQL
 gem 'puma'          # Servidor web (alternativa a WEBrick)

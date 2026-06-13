@@ -14,15 +14,13 @@ export function Sidebar({ student }) {
     <aside className="dashboard-sidebar">
       <div className="sidebar-user">
         <p className="sidebar-user__name">{student?.nombre || 'Estudiante'}</p>
-        <p className="sidebar-user__cedula">{student?.cedula}</p>
-        <p className="sidebar-user__carrera">{student?.carrera}</p>
+        <p className="sidebar-user__cedula">C.I. {student?.cedula}</p>
+        <p className="sidebar-user__email">{student?.email}</p>
       </div>
 
       <nav>
         <ul>
           <li><a href="/dashboard">Resumen</a></li>
-          <li><a href="/dashboard/cursos">Mis cursos</a></li>
-          <li><a href="/dashboard/perfil">Perfil</a></li>
         </ul>
       </nav>
 
