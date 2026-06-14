@@ -8,15 +8,17 @@ class AuthService
         activo: true
       )
 
-      Estudiante.create(
+      cols = Estudiante.columns
+      estudiante_data = {
         usuario_id: usuario.id,
         cedula_identidad: data['cedula_identidad'],
         primer_nombre: data['primer_nombre'],
         primer_apellido: data['primer_apellido'],
-        segundo_nombre: data['segundo_nombre'],
-        segundo_apellido: data['segundo_apellido'],
-        telefono: data['telefono']
-      )
+      }
+      estudiante_data[:segundo_nombre] = data['segundo_nombre'] if cols.include?(:segundo_nombre)
+      estudiante_data[:segundo_apellido] = data['segundo_apellido'] if cols.include?(:segundo_apellido)
+      estudiante_data[:telefono] = data['telefono'] if cols.include?(:telefono)
+      Estudiante.create(estudiante_data)
 
       usuario
     end

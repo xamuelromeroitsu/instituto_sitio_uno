@@ -7,7 +7,7 @@ class App
     halt 422, { error: result.errors.to_h }.to_json unless result.success?
 
     begin
-      usuario = AuthService.register(result.to_h)
+      usuario = AuthService.register(data)
 
       token = generar_token('user_id' => usuario.id, 'email' => usuario.email, 'rol' => usuario.rol)
 
@@ -17,7 +17,7 @@ class App
         token: token,
         user: {
           email: usuario.email,
-          nombre: "#{data['nombre']} #{data['apellido']}",
+          nombre: "#{data['primer_nombre']} #{data['primer_apellido']}",
           rol: usuario.rol
         }
       }.to_json
