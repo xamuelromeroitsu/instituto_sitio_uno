@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../contexts/AuthContext'
 import { registerStudent } from '../services/authService'
+import { GoogleLoginButton } from './GoogleLoginButton'
 
 export function RegisterForm() {
   const navigate = useNavigate()
@@ -110,6 +111,8 @@ export function RegisterForm() {
       <button className="auth-button" type="submit" disabled={loading}>
         {loading ? 'Registrando…' : 'Registrarse'}
       </button>
+
+      <GoogleLoginButton />
     </form>
   )
 }

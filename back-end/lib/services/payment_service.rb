@@ -1,4 +1,4 @@
-require_relative '../account'
+require_relative '../entities/account'
 require 'date'
 
 module Services

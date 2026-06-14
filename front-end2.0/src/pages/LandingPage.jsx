@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BrandHeader, HeroSection, SectionHeading, ValueGrid, SiteFooter } from '../components'
 import { AuthModal } from '../features/auth/components/AuthModal'
+import { PaymentLookup } from '../components/PaymentLookup'
 
 const hero = {
   eyebrow: 'Campus digital',
@@ -65,6 +66,8 @@ export function LandingPage() {
           <SectionHeading eyebrow={values.eyebrow} title={values.title} />
           <ValueGrid items={values.items} />
         </section>
+
+        <PaymentLookup />
       </main>
 
       <SiteFooter />

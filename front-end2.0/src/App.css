@@ -750,6 +750,46 @@ a {
   text-align: right;
 }
 
+/* ── Google Login ── */
+.google-login-wrapper {
+  display: grid;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.google-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.google-divider::before,
+.google-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.google-config-warning {
+  padding: 12px;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background: rgba(255, 243, 205, 0.4);
+  color: #856404;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.google-config-warning code {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+}
+
 /* ── Responsive dashboard ── */
 @media (max-width: 960px) {
   .dashboard-layout {

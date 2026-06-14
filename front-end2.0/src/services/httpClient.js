@@ -1,11 +1,18 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
+function getAuthHeaders() {
+  const token = localStorage.getItem('itsu_token')
+  return token ? { Authorization: `Bearer ${token}` } : {}
+}
+
 async function request(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`
+  const authHeaders = getAuthHeaders()
 
   const config = {
     headers: {
       'Content-Type': 'application/json',
+      ...authHeaders,
       ...options.headers,
     },
     ...options,
@@ -15,7 +22,7 @@ async function request(endpoint, options = {}) {
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}))
-    throw new Error(error.message || `Error ${response.status}`)
+    throw new Error(error.message || error.error || `Error ${response.status}`)
   }
 
   return response.json()

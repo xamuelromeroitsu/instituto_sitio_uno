@@ -3,6 +3,7 @@ import { getDashboardData } from '../features/dashboard/services/dashboardServic
 import { Sidebar } from '../features/dashboard/components/Sidebar'
 import { AcademicSummary } from '../features/dashboard/components/AcademicSummary'
 import { EnrolledClasses } from '../features/dashboard/components/EnrolledClasses'
+import { PaymentSection } from '../features/dashboard/components/PaymentSection'
 
 export function DashboardPage() {
   const [data, setData] = useState(null)
@@ -48,6 +49,7 @@ export function DashboardPage() {
         <div className="dashboard-main">
           <AcademicSummary summary={data.summary} />
           <EnrolledClasses classes={data.classes} />
+          <PaymentSection />
         </div>
       </div>
     </div>
