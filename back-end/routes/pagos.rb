@@ -1,5 +1,7 @@
+require 'fileutils'
 require_relative '../models/factura'
 require_relative '../models/estudiante'
+require_relative '../models/arancel'
 require_relative '../middleware/jwt_auth'
 require_relative '../lib/entities/account'
 require_relative '../lib/services/payment_service'
@@ -9,7 +11,7 @@ class App
     facturas = Factura.where(estudiante_id: estudiante_id).all
     meses = []
     (1..12).each do |m|
-      factura_mes = facturas.find { |f| f[:periodo_id] == m }
+      factura_mes = facturas.find { |f| f[:fecha_vencimiento] && f[:fecha_vencimiento].month == m }
       pagada = (factura_mes && factura_mes[:estado_pago] == 'pagada') ? true : false
       meses << { mes: m, pagada: pagada, monto: factura_mes ? factura_mes[:monto_total_centavos] : nil }
     end
@@ -62,9 +64,32 @@ class App
     estudiante = usuario.estudiante
     halt 404, JSON.generate({ error: 'Estudiante no encontrado' }) unless estudiante
 
-    mes = @json_body[:mes].to_i
-    monto = @json_body[:monto].to_i
-    referencia = @json_body[:referencia] || "REF-#{mes}-#{Time.now.to_i}"
+    mes = (params[:mes] || @json_body[:mes]).to_i
+    arancel = Arancel.where(descripcion: 'Mensualidad').first
+    monto = arancel ? arancel[:monto_centavos] : (@json_body[:monto].to_i)
+    referencia = "PAGO-#{mes}-#{Time.now.to_i}"
+
+    allowed_types = %w[image/jpeg image/png image/webp]
+    max_size = 10 * 1024 * 1024
+    comprobante_paths = []
+    files = params[:comprobante]
+    files = [files] unless files.is_a?(Array)
+    files.each do |f|
+      next unless f.is_a?(Hash) && f[:tempfile]
+      unless allowed_types.include?(f[:type])
+        next
+      end
+      if f[:tempfile].size > max_size
+        next
+      end
+      ext = File.extname(f[:filename])
+      filename = "#{Time.now.to_i}_#{rand(9999)}#{ext}"
+      dest = File.join(settings.root, 'public', 'uploads', 'comprobantes', filename)
+      FileUtils.mkdir_p(File.dirname(dest))
+      File.open(dest, 'wb') { |out| out.write(f[:tempfile].read) }
+      comprobante_paths << "/uploads/comprobantes/#{filename}"
+    end
+    comprobante_str = comprobante_paths.empty? ? nil : comprobante_paths.join(',')
 
     factura = Factura.where(estudiante_id: estudiante[:id]).where(Sequel.lit("EXTRACT(MONTH FROM fecha_vencimiento) = ?", mes)).first
     unless factura
@@ -84,11 +109,12 @@ class App
     transaccion = DB[:transacciones_pagos].insert(
       factura_id: factura[:id],
       referencia_bancaria: referencia,
-      metodo_pago: 'transferencia',
+      metodo_pago: 'pago_movil',
       monto_pagado_centavos: monto,
-      estado_transaccion: 'confirmada'
+      estado_transaccion: 'confirmada',
+      comprobante_path: comprobante_str
     )
 
-    JSON.generate({ success: true, mes: mes, estado: 'pagada', referencia: referencia })
+    JSON.generate({ success: true, mes: mes, estado: 'pagada', comprobantes: comprobante_paths })
   end
 end

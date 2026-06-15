@@ -3,20 +3,41 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../contexts/AuthContext'
 import { registerStudent } from '../services/authService'
 import { GoogleLoginButton } from './GoogleLoginButton'
+import { useToast } from '../../../contexts/ToastContext'
 
 export function RegisterForm() {
   const navigate = useNavigate()
   const { login } = useAuth()
+  const { addToast } = useToast()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState({})
+
+  const validate = (form) => {
+    const errors = {}
+    const password = form.get('password')
+    const confirm = form.get('password_confirm')
+    const email = form.get('email')
+
+    if (!email) errors.email = 'El correo es requerido'
+    if (!password || password.length < 4) errors.password = 'Mínimo 4 caracteres'
+    if (password !== confirm) errors.password_confirm = 'Las contraseñas no coinciden'
+
+    setFieldErrors(errors)
+    return Object.keys(errors).length === 0
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    setFieldErrors({})
+
+    const form = new FormData(e.target)
+    if (!validate(form)) return
+
     setLoading(true)
 
     try {
-      const form = new FormData(e.target)
       const payload = Object.fromEntries(form)
       const response = await registerStudent(payload)
 
@@ -24,9 +45,11 @@ export function RegisterForm() {
         await login(form.get('email'), form.get('password'))
       }
 
+      addToast('Registro exitoso. ¡Bienvenido!', 'success')
       navigate('/dashboard')
     } catch (err) {
       setError(err.message)
+      addToast(err.message, 'error')
     } finally {
       setLoading(false)
     }
@@ -40,19 +63,35 @@ export function RegisterForm() {
         <h3>Cuenta de usuario</h3>
 
         <label className="field">
-          <span>Correo</span>
-          <input type="email" name="email" placeholder="Email" autoComplete="email" required />
+          <span>Correo <span className="required">*</span></span>
+          <input type="email" name="email" placeholder="Email" autoComplete="email" required className={fieldErrors.email ? 'field--error' : ''} />
+          {fieldErrors.email && <span className="field-err">{fieldErrors.email}</span>}
         </label>
 
         <label className="field">
-          <span>Contraseña</span>
+          <span>Contraseña <span className="required">*</span></span>
           <input
             type="password"
             name="password"
             placeholder="Crear contraseña"
             autoComplete="new-password"
             required
+            className={fieldErrors.password ? 'field--error' : ''}
           />
+          {fieldErrors.password && <span className="field-err">{fieldErrors.password}</span>}
+        </label>
+
+        <label className="field">
+          <span>Confirmar contraseña <span className="required">*</span></span>
+          <input
+            type="password"
+            name="password_confirm"
+            placeholder="Repite la contraseña"
+            autoComplete="new-password"
+            required
+            className={fieldErrors.password_confirm ? 'field--error' : ''}
+          />
+          {fieldErrors.password_confirm && <span className="field-err">{fieldErrors.password_confirm}</span>}
         </label>
 
         <label className="field">
@@ -60,13 +99,7 @@ export function RegisterForm() {
           <select name="rol" defaultValue="estudiante">
             <option value="estudiante">Estudiante</option>
             <option value="profesor">Profesor</option>
-            <option value="administrador">Administrador</option>
           </select>
-        </label>
-
-        <label className="checkbox-field">
-          <input type="checkbox" name="activo" defaultChecked />
-          <span>Cuenta activa</span>
         </label>
       </section>
 

@@ -5,29 +5,33 @@ require 'net/http'
 require 'openssl'
 
 class App
+  GOOGLE_CLIENT_ID = '67448746116-54ptvhc20hvenab7fjajcg5g079v8suk.apps.googleusercontent.com'
   GOOGLE_CERTS_URI = 'https://www.googleapis.com/oauth2/v3/certs'
 
   def self.verificar_token_google(id_token)
     return nil unless id_token
+
+    header = JWT.decode(id_token, nil, false)[1]
+    kid = header['kid']
+    return nil unless kid
 
     uri = URI(GOOGLE_CERTS_URI)
     res = Net::HTTP.get(uri)
     certs_data = JSON.parse(res)
     keys = certs_data['keys']
 
-    header = JWT.decode(id_token, nil, false)[1]
-    kid = header['kid']
     key_data = keys.find { |k| k['kid'] == kid }
     return nil unless key_data
 
-    public_key = OpenSSL::X509::Certificate.new(
-      "-----BEGIN CERTIFICATE-----\n#{key_data['x5c'].first}\n-----END CERTIFICATE-----"
-    ).public_key
+    jwk = JWT::JWK.import(key_data)
+    public_key = jwk.public_key
 
     decoded = JWT.decode(id_token, public_key, true, {
       algorithm: 'RS256',
-      iss: 'https://accounts.google.com',
-      verify_iss: true
+      iss: ['https://accounts.google.com', 'accounts.google.com'],
+      verify_iss: true,
+      aud: GOOGLE_CLIENT_ID,
+      verify_aud: true
     })
     payload = decoded[0]
     return nil unless payload['email_verified']
@@ -61,7 +65,8 @@ class App
         id: usuario[:id],
         email: usuario[:email],
         rol: usuario[:rol],
-        nombre: nombre
+        nombre: nombre,
+        provider: 'local'
       }
     })
   end
@@ -72,10 +77,16 @@ class App
       password = @json_body[:password]
       hashed = Usuario.hash_password(password)
 
+      rol_value = @json_body[:rol].to_s.downcase
+      allowed_roles = %w[estudiante profesor]
+      unless allowed_roles.include?(rol_value)
+        rol_value = 'estudiante'
+      end
+
       usuario = Usuario.create(
         email: @json_body[:email],
         password_digest: hashed,
-        rol: @json_body[:rol] || 'estudiante',
+        rol: rol_value,
         activo: @json_body[:activo].nil? ? true : @json_body[:activo]
       )
 
@@ -147,9 +158,58 @@ class App
           id: usuario[:id],
           email: usuario[:email],
           rol: usuario[:rol],
-          nombre: nombre
+          nombre: nombre,
+          provider: 'google'
         }
       })
+    end
+  end
+
+  if ENV['RACK_ENV'] == 'development'
+    post '/api/auth/google/dev' do
+      content_type :json
+      email = @json_body[:email]
+      nombre = @json_body[:nombre] || email.split('@').first
+      name_parts = nombre.split(' ', 2)
+
+      halt 400, { error: 'Email requerido' }.to_json unless email
+
+      DB.transaction do
+        usuario = Usuario.where(email: email).first
+
+        unless usuario
+          password_placeholder = SecureRandom.hex(32)
+          usuario = Usuario.create(
+            email: email,
+            password_digest: Usuario.hash_password(password_placeholder),
+            rol: 'estudiante',
+            activo: true
+          )
+
+          Estudiante.create(
+            usuario_id: usuario[:id],
+            cedula_identidad: "DEV-#{SecureRandom.hex(4).upcase}",
+            primer_nombre: name_parts.first || nombre,
+            primer_apellido: name_parts[1] || 'Google',
+            telefono: nil
+          )
+        end
+
+        estudiante = usuario.estudiante
+        token = Middleware::JwtAuth.encode({ id: usuario[:id], email: usuario[:email], rol: usuario[:rol] })
+        nombre_completo = estudiante ? "#{estudiante[:primer_nombre].force_encoding('UTF-8')} #{estudiante[:primer_apellido].force_encoding('UTF-8')}" : nombre
+
+        JSON.generate({
+          token: token,
+          user: {
+            id: usuario[:id],
+            email: usuario[:email],
+            rol: usuario[:rol],
+            nombre: nombre_completo,
+            provider: 'google'
+          }
+        })
+      end
     end
   end
 end

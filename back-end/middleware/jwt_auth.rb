@@ -2,7 +2,7 @@ require 'jwt'
 
 module Middleware
   class JwtAuth
-    SECRET = ENV['JWT_SECRET'] || 'itsu_dev_secret_2026'
+    SECRET = ENV['JWT_SECRET'] || (raise "JWT_SECRET environment variable is required")
 
     def self.encode(payload)
       payload[:exp] = Time.now.to_i + 86400 * 7

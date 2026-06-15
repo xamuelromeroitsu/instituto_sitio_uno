@@ -47,14 +47,12 @@ class App
     aprobadas = inscripciones.count { |i| i[:nota_final] && i[:nota_final] >= 10 }
     creditos_total = materias_data.sum { |m| m[:creditos] }
 
-    def enc(v)
-      v.is_a?(String) ? v.force_encoding('UTF-8') : v
-    end
+    enc = ->(v) { v.is_a?(String) ? v.force_encoding('UTF-8') : v }
 
     payload = {
       student: {
-        nombre: enc("#{estudiante[:primer_nombre]} #{estudiante[:primer_apellido]}"),
-        cedula: enc(estudiante[:cedula_identidad]),
+        nombre: enc.call("#{estudiante[:primer_nombre]} #{estudiante[:primer_apellido]}"),
+        cedula: enc.call(estudiante[:cedula_identidad]),
         carrera: 'Desarrollo de Software'
       },
       summary: {
@@ -65,11 +63,11 @@ class App
       },
       classes: materias_data.map { |m|
         {
-          codigo: enc(m[:codigo]),
-          nombre: enc(m[:nombre]),
+          codigo: enc.call(m[:codigo]),
+          nombre: enc.call(m[:nombre]),
           profesor: m[:profesor],
-          horario: enc(m[:horario]),
-          aula: enc(m[:aula])
+          horario: enc.call(m[:horario]),
+          aula: enc.call(m[:aula])
         }
       }
     }

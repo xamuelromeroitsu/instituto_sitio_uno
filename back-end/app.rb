@@ -10,9 +10,11 @@ Dir['./models/*.rb'].each { |f| require f }
 require_relative 'lib/services/academic_service'
 
 class App < Sinatra::Base
+  FRONTEND_ORIGIN = ENV['FRONTEND_ORIGIN'] || 'http://172.16.20.114:5173'
+
   use Rack::Cors do
     allow do
-      origins '*'
+      origins FRONTEND_ORIGIN, 'http://localhost:5173', 'http://localhost:4567'
       resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
     end
   end
@@ -33,6 +35,10 @@ class App < Sinatra::Base
     end
   end
 
+  get '/api/health' do
+    JSON.generate({ status: 'ok', time: Time.now.iso8601 })
+  end
+
   options '*' do
     200
   end
@@ -42,7 +48,7 @@ class App < Sinatra::Base
     $stderr.puts "ERROR: #{err.class}: #{err.message}"
     $stderr.puts err.backtrace.first(10).join("\n") if err.backtrace
     status 500
-    { error: 'Error interno del servidor', detail: err.message }.to_json
+    { error: 'Error interno del servidor' }.to_json
   end
 
   not_found do
@@ -53,3 +59,4 @@ end
 require_relative 'routes/auth'
 require_relative 'routes/dashboard'
 require_relative 'routes/pagos'
+require_relative 'routes/aranceles'
