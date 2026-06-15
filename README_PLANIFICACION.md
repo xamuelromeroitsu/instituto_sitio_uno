@@ -29,19 +29,19 @@ Este documento contiene la hoja de ruta dividida por **Oleadas de Trabajo**, asi
 **Objetivo:** Levantar la base del proyecto, el sistema de seguridad central (RBAC) y el core del perfil estudiantil.
 
 ### 📅 Día 1: Setup e Infraestructura Base
-* [ ] **[INFRA-1] (XR):** Configurar entorno Docker, Docker Compose y esqueleto de enrutamiento Roda en la raíz.
+* [x] **[INFRA-1] (XR):** Configurar entorno Docker, Docker Compose y esqueleto de enrutamiento Roda en la raíz.
 * [x] **[UI-1] (AM):** Crear estructura base `index.html`, configurar Tailwind CSS y el enrutador básico de la SPA en JS.
-* [ ] **[DB-1] (AC):** Diseñar migraciones iniciales en PostgreSQL para las tablas de `usuarios` y `estudiantes` usando Sequel.
+* [x] **[DB-1] (AC):** Diseñar migraciones iniciales en PostgreSQL para las tablas de `usuarios` y `estudiantes` usando Sequel.
 
 ### 📅 Día 2: Módulo de Autenticación (Core de Seguridad)
-* [ ] **[AUTH-1] (XR):** Escribir pruebas unitarias (RSpec) y lógica para el hash de claves con BCrypt y emisión de tokens JWT en `services.rb`.
-* [ ] **[AUTH-2] (AC):** Implementar `schemas.rb` (Dry-Validation) y los endpoints en `controllers.rb` para el Login.
-* [ ] **[AUTH-3] (AM):** Diseñar vista de Login en la SPA, capturar el formulario con JS y almacenar el JWT de forma segura en `localStorage`.
+* [x] **[AUTH-1] (XR):** Escribir pruebas unitarias (RSpec) y lógica para el hash de claves con BCrypt y emisión de tokens JWT en `services.rb`.
+* [x] **[AUTH-2] (AC):** Implementar `schemas.rb` (Dry-Validation) y los endpoints en `controllers.rb` para el Login.
+* [x] **[AUTH-3] (AM):** Diseñar vista de Login en la SPA, capturar el formulario con JS y almacenar el JWT de forma segura en `localStorage`.
 
 ### 📅 Día 3: Módulo de Estudiantes (Autogestión)
-* [ ] **[EST-1] (AC):** Desarrollar la lógica de negocio para el cálculo del índice académico acumulado en `estudiantes/services.rb`.
-* [ ] **[EST-2] (XR):** Crear el controlador y contrato JSON para el endpoint seguro `GET /estudiante/perfil`.
-* [ ] **[EST-3] (AM):** Crear la interfaz del *Dashboard del Estudiante* en la SPA consumiendo los datos del perfil mediante `fetch()` con el token de seguridad.
+* [x] **[EST-1] (AC):** Desarrollar la lógica de negocio para el cálculo del índice académico acumulado en `estudiantes/services.rb`.
+* [x] **[EST-2] (XR):** Crear el controlador y contrato JSON para el endpoint seguro `GET /estudiante/perfil`.
+* [x] **[EST-3] (AM):** Crear la interfaz del *Dashboard del Estudiante* en la SPA consumiendo los datos del perfil mediante `fetch()` con el token de seguridad.
 
 ---
 
