@@ -1,16 +1,18 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../contexts/AuthContext'
+import { parseServerError } from '../../../services/errorHandler'
+import { FormError } from './FormError'
 
 export function LoginForm() {
   const { login } = useAuth()
   const navigate = useNavigate()
-  const [error, setError] = useState('')
+  const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setError('')
+    setError(null)
     setLoading(true)
 
     try {
@@ -18,7 +20,7 @@ export function LoginForm() {
       await login(form.get('email'), form.get('password'))
       navigate('/dashboard')
     } catch (err) {
-      setError(err.message)
+      setError(err)
     } finally {
       setLoading(false)
     }
@@ -26,7 +28,7 @@ export function LoginForm() {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-      {error && <p className="auth-error">{error}</p>}
+      <FormError error={error} />
 
       <label className="field">
         <span>Correo institucional</span>

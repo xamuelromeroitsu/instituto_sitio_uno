@@ -404,13 +404,56 @@ a {
   height: 18px;
 }
 
-.auth-error {
+.auth-error,
+.form-error {
   background: #fef2f2;
   color: #b91c1c;
   padding: 10px 14px;
   border-radius: 10px;
   font-size: 0.875rem;
   margin: 0 0 12px;
+}
+
+.form-error--401 { background: #fff7ed; color: #9a3412; }
+.form-error--409 { background: #fefce8; color: #854d0e; }
+.form-error--422 { background: #fef2f2; color: #b91c1c; }
+.form-error--500 { background: #fef2f2; color: #991b1b; }
+
+.form-error__message {
+  margin: 0;
+  font-weight: 600;
+}
+
+.form-error__fields {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  font-size: 0.85rem;
+}
+
+.form-error__fields li {
+  margin-bottom: 2px;
+}
+
+.form-success {
+  background: #f0fdf4;
+  color: #166534;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.field--error input,
+.field--error select {
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+
+.field__error-msg {
+  color: #dc2626;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .auth-button,

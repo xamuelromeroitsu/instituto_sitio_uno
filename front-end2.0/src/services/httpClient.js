@@ -8,6 +8,15 @@ function getToken() {
   }
 }
 
+class ApiError extends Error {
+  constructor(status, body) {
+    const msg = typeof body?.error === 'string' ? body.error : `Error ${status}`
+    super(msg)
+    this.status = status
+    this.body = body
+  }
+}
+
 async function request(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`
   const token = getToken()
@@ -24,8 +33,8 @@ async function request(endpoint, options = {}) {
   const response = await fetch(url, config)
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({}))
-    throw new Error(error.message || `Error ${response.status}`)
+    const body = await response.json().catch(() => ({}))
+    throw new ApiError(response.status, body)
   }
 
   return response.json()
