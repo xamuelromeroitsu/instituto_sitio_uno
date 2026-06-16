@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom'
 import { useHeaderScroll } from '../hooks/useHeaderScroll'
 
-export function BrandHeader({ onOpenLogin, onOpenRegister }) {
+export function BrandHeader() {
   const { isScrolled, isHidden } = useHeaderScroll()
 
   return (
@@ -18,12 +19,12 @@ export function BrandHeader({ onOpenLogin, onOpenRegister }) {
       </a>
 
       <nav className="header-actions" aria-label="Acciones principales">
-        <button className="header-action outline" type="button" onClick={onOpenLogin}>
+        <Link className="header-action outline" to="/iniciar-sesion">
           Iniciar sesión
-        </button>
-        <button className="header-action solid" type="button" onClick={onOpenRegister}>
+        </Link>
+        <Link className="header-action solid" to="/registro">
           Registrarse
-        </button>
+        </Link>
       </nav>
     </header>
   )

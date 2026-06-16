@@ -1,0 +1,16 @@
+source 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'rackup'
+gem 'sequel'
+gem 'pg'
+gem 'puma'
+gem 'bcrypt'
+gem 'jwt'
+gem 'rack-cors'
+gem 'dry-validation'
+
+group :test do
+  gem 'minitest'
+  gem 'rack-test'
+end
