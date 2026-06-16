@@ -22,6 +22,11 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
-    "vite": "^8.0.12"
-  }
+    "vite": "^8.0.16"
+  },
+  "description": "Landing page institucional construida con React y Vite, refactorizada desde el front-end estático original.",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
